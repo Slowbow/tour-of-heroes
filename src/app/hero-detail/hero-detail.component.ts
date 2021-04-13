@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -20,6 +20,7 @@ export class HeroDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private horseService: HorseService,
     private heroService: HeroService,
     private location: Location
   ) {}
@@ -47,11 +48,13 @@ export class HeroDetailComponent implements OnInit {
     this.showHorses = !this.showHorses;
   }
 
-  onHorseSelectedHandler(horse: Horse): void {
+    //Selected horse is being assigned to a hero 
+    onHorseSelectedHandler(horse: Horse): void {
     this.selectedHorse = horse;
     this.hero.horse = horse;
     this.save();
-    //TO DO: remove horse from the list of horses
+    //Horse removed from horses list as that horse is now taken 
+    this.horseService.deleteHorse(horse.id).subscribe();
   }
-
 }
+

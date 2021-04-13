@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 import { Horse } from '../horse';
 import { HorseService } from '../horse.service';
@@ -15,10 +15,8 @@ export class HorsesComponent implements OnInit {
   horses: Horse[];
   selectedHorse: Horse;
   
-  //input mi nece trebati
-
-  //output - event saljem u parent - u hero detail - kliknuti heroj info
   @Output() onHorseSelected: EventEmitter<Horse> =   new EventEmitter();
+  @Input() horseToDelete: Horse; 
 
   constructor(private horseService: HorseService, public router: Router) { }
 
@@ -39,6 +37,7 @@ export class HorsesComponent implements OnInit {
         this.horses.push(horse);
       });
   }
+  
   delete(horse: Horse): void {
     this.horses = this.horses.filter(h => h !== horse);
     this.horseService.deleteHorse(horse.id).subscribe();
