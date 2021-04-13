@@ -1,0 +1,31 @@
+<h2>Horses</h2>
+
+<div *ngIf="router.url === '/horses'">
+    <div>
+        <label id="new-horse-name">Name your horse: </label>
+        <input for="new-horse-name" #horseName />
+        <label id="new-horse-color">Choose horse color, or enter hexadecimal code for desired color: </label>
+        <!-- Color picker komponenta-->
+        <color-block 
+              triangle ="hide" 
+              color="##5b342e"
+              #horseColor (onChange)="handleChange($event)"></color-block>
+        <button class="add-button" (click)="add(horseName.value, horseColor.hex); horseName.value=''">
+          Add horse
+        </button>
+      </div>
+</div>
+
+<ul class="horses">
+  <li *ngFor="let horse of horses" (click)="selectHorse(horse)">
+        <a >
+            <div class="badge" [style.background-color]="horse.color">
+            {{horse.color}}</div> 
+            {{horse.name}}
+        </a>
+        <div *ngIf="router.url === '/horses'">
+            <button class="delete" title="delete horse"
+            (click)="delete(horse)">x</button>
+        </div>
+  </li>
+</ul>
