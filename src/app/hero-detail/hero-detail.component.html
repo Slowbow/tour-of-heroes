@@ -9,6 +9,6 @@
   <button (click)="save()">save</button>
   <button (click)="assignHorse()">assign a horse</button>
   <div *ngIf="showHorses!">
-      <app-horses (onHorseSelected)="onHorseSelectedHandler($event)" ngDefaultControl  [(ngModel)]="hero.horse"></app-horses>
+      <app-horses (onHorseSelected)="onHorseSelectedHandler($event)" ngDefaultControl  [(ngModel)]="hero.horse" ></app-horses>
   </div>
 </div>
