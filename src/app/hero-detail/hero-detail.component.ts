@@ -44,17 +44,18 @@ export class HeroDetailComponent implements OnInit {
       .subscribe(() => this.goBack());
   }
 
-  assignHorse(): void{
+  showAssignHorse(): void{
     this.showHorses = !this.showHorses;
   }
 
-    //Selected horse is being assigned to a hero 
+    // Selected horse is being assigned to a hero 
     onHorseSelectedHandler(horse: Horse): void {
     this.selectedHorse = horse;
     this.hero.horse = horse;
     this.save();
-    //Horse removed from horses list as that horse is now taken 
-    this.horseService.deleteHorse(horse.id).subscribe();
+    horse.hero = true;
+    this.horseService.updateHorse(horse).subscribe();
+    console.log(horse);
   }
 }
 

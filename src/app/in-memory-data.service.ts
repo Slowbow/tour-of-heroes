@@ -9,9 +9,7 @@ import { Horse } from './horse';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const heroes = [
-      { id: 11, name: 'Dr Nice', horse: {
-        id:11, name: 'Bojko', color: '#ffffff'
-      } },
+      { id: 11, name: 'Dr Nice', horse: {id:11, name: 'Bojko', color: '#ffffff', hero: true} },
       { id: 12, name: 'Narco' },
       { id: 13, name: 'Bombasto' },
       { id: 14, name: 'Celeritas' },
@@ -23,9 +21,9 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 20, name: 'Tornado' }
     ];
     const horses = [
-      { id:11, name: 'Bojko', color: '#ffffff'},
-      { id:12, name: 'Garo', color: '#000000'},
-      { id:13, name: 'Hrabri', color: '#8b4513'}
+      { id:11, name: 'Bojko', color: '#ffffff', hero: true },
+      { id:12, name: 'Garo', color: '#000000', hero: false},
+      { id:13, name: 'Hrabri', color: '#8b4513', hero: false}
     ];
    
     return {heroes, horses};

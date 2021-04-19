@@ -28,7 +28,7 @@ export class HorseService {
            catchError(this.handleError<Horse[]>('getHorses', []))
         );
   }
-  
+
   //////// Save methods //////////
 
   /** POST: add a new horse to the server */
@@ -50,7 +50,10 @@ export class HorseService {
 
   /** PUT: update the hero on the server */
   updateHorse(horse: Horse): Observable<any> {
-      return this.http.put(this.horseUrl, horse, this.httpOptions);
+    return this.http.put(this.horseUrl, horse, this.httpOptions).pipe(
+      tap(_ => this.log(`updated hero id=${horse.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );
     }
 
       /**

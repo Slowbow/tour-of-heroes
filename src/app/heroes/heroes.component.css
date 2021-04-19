@@ -63,6 +63,7 @@ input {
 }
 .heroes .heroes-horse {
   right: 10em;
+  margin-left: 2.5em;
 }
 .heroes .horse-badge {
   display: inline-block;
