@@ -12,7 +12,7 @@
   </button>
   <button *ngIf="!hero.horse" (click)="showAssignHorse()">assign a horse</button>
     <div *ngIf="showHorses!">
-      <app-horses (onHorseSelected)="onHorseSelectedHandler($event)" ngDefaultControl  [(ngModel)]="hero.horse" ></app-horses>
+      <app-horses (horseSelected)="horseSelectedHandler($event)" ngDefaultControl  [(ngModel)]="hero.horse" ></app-horses>
     </div>
   
 

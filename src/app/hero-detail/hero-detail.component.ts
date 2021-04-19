@@ -15,7 +15,7 @@ import { HorseService } from '../horse.service';
 export class HeroDetailComponent implements OnInit {
   @Input () horse: Horse;
   hero: Hero;
-  showHorses: boolean = false;
+  showHorses: boolean;
   selectedHorse: Horse;
 
   constructor(
@@ -43,13 +43,12 @@ export class HeroDetailComponent implements OnInit {
     this.heroService.updateHero(this.hero)
       .subscribe(() => this.goBack());
   }
-
+  // Toggle show horses component
   showAssignHorse(): void{
     this.showHorses = !this.showHorses;
   }
-
-    // Selected horse is being assigned to a hero 
-    onHorseSelectedHandler(horse: Horse): void {
+  // Selected horse is being assigned to a hero
+  horseSelectedHandler(horse: Horse): void {
     this.selectedHorse = horse;
     this.hero.horse = horse;
     this.save();

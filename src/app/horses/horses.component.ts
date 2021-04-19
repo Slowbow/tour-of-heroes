@@ -15,12 +15,9 @@ import { HeroService } from '../hero.service';
 export class HorsesComponent implements OnInit {
   horses: Horse[];
   selectedHorse: Horse;
-  
-  @Output() onHorseSelected: EventEmitter<Horse> =   new EventEmitter();
-  @Input() horseToDelete: Horse; 
-
+  @Output() horseSelected: EventEmitter<Horse> = new EventEmitter();
+  @Input() horseToDelete: Horse;
   constructor(private horseService: HorseService, private heroService: HeroService, public router: Router) { }
-
   ngOnInit(): void {
     this.getHorses();
   }
@@ -38,7 +35,7 @@ export class HorsesComponent implements OnInit {
         this.horses.push(horse);
       });
   }
-  
+
   delete(horse: Horse): void {
     this.horses = this.horses.filter(h => h !== horse);
     this.horseService.deleteHorse(horse.id).subscribe();
@@ -48,9 +45,8 @@ export class HorsesComponent implements OnInit {
     console.log($event.color);
   }
 
-  selectHorse(horse: Horse) { 
+  selectHorse(horse: Horse) {
     this.selectedHorse = horse;
-    this.onHorseSelected.emit(horse);
+    this.horseSelected.emit(horse);
   }
-  
 }
