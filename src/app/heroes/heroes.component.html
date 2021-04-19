@@ -13,12 +13,10 @@
     <a routerLink="/detail/{{hero.id}}">
       <span class="badge">{{hero.id}}</span> {{hero.name}} 
     </a>
-    <a (click)="unassign(hero)" class="heroes-horse" *ngIf="hero.horse">
-      <span class="horse-badge" >>></span>
-        is mounted on {{hero.horse.name}}
+    <a  class="heroes-horse" *ngIf="hero.horse">
+      <span class="horse-badge" >>></span> is mounted on {{hero.horse.name}}
     </a>
      <button class="delete" title="delete hero"
-      (click)="delete(hero)">x</button>
-
+      (click)="delete(hero, hero.horse)">x</button>
   </li>
 </ul>

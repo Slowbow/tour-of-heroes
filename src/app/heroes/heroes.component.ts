@@ -4,7 +4,6 @@ import { Hero } from '../hero';
 import { HeroService } from '../hero.service';
 import { Horse } from '../horse';
 import { HorseService } from '../horse.service';
-import { HorsesComponent } from '../horses/horses.component';
 
 @Component({
   selector: 'app-heroes',
@@ -14,12 +13,14 @@ import { HorsesComponent } from '../horses/horses.component';
 
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
-  horses: Horse;
-
+  horse: Horse;
+  horseList: Horse[];
+  realHorse: Horse;
   constructor(private heroService: HeroService, private horseService: HorseService) { }
 
   ngOnInit() {
     this.getHeroes();
+    this.getHorses();
   }
 
   getHeroes(): void {
@@ -27,31 +28,29 @@ export class HeroesComponent implements OnInit {
     .subscribe(heroes => this.heroes = heroes);
   }
 
+  getHorses(): void {
+    this.horseService.getHorses()
+      .subscribe(horseReal => this.horseList = horseReal);
+  }
+
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
-
-    this.heroService.addHero({ name } as Hero)
-      .subscribe(hero => {
-        this.heroes.push(hero);
-      });
+    this.heroService.addHero({ name } as Hero).subscribe(hero => {
+      this.heroes.push(hero);
+    });
   }
 
-  delete(hero: Hero): void {
+  delete(hero: Hero, horse?: Horse): void {
     this.heroes = this.heroes.filter(h => h !== hero);
+    this.horseList.forEach(realHorse => {
+      if (realHorse.id === horse.id){
+        realHorse.hero = false;
+        this.horseService.updateHorse(realHorse).subscribe();
+        console.log(realHorse);
+      }
+    });
     this.heroService.deleteHero(hero.id).subscribe();
   }
 
-  //It would remove horse object from the hero and add it back to Horses list
-  //UI element needs to be touched-up
-  unassign(hero: Hero): void {
-    //Add horse back to horses list 
-    // this.horseService.addHorse({ this.horse.name, this.horse.color } as Horse)
-    //     .subscribe(horse => {
-    //       this.horses.push(horse);
-    //     });
-    // }    
-    hero.horse = {} as any;
-    this.heroService.updateHero(hero).subscribe();
-  }
 }

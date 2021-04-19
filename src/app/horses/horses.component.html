@@ -1,6 +1,7 @@
-<h2>Horses</h2>
 
 <div *ngIf="router.url === '/horses'">
+<h2>Add new hrorse:</h2>
+
     <div>
         <label id="new-horse-name">Name your horse: </label>
         <input for="new-horse-name" #horseName />
@@ -15,17 +16,21 @@
         </button>
       </div>
 </div>
-
+<h2>List of Horses:</h2>
 <ul class="horses">
   <li *ngFor="let horse of horses" (click)="selectHorse(horse)">
-        <a >
+        <a>
             <div class="badge" [style.background-color]="horse.color">
             {{horse.color}}</div> 
             {{horse.name}}
+            <div class="hero" *ngIf="horse.hero">
+              is taken.
+            </div>
         </a>
         <div *ngIf="router.url === '/horses'">
             <button class="delete" title="delete horse"
             (click)="delete(horse)">x</button>
         </div>
+
   </li>
 </ul>

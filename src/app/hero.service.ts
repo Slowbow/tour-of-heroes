@@ -5,15 +5,13 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Hero } from './hero';
+import { Horse } from './horse';
 import { MessageService } from './message.service';
-
 
 @Injectable({ providedIn: 'root' })
 
 export class HeroService {
-
   private heroesUrl = 'api/heroes';  // URL to web api
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -79,9 +77,8 @@ export class HeroService {
   }
 
   /** DELETE: delete the hero from the server */
-  deleteHero(id: number): Observable<Hero> {
+  deleteHero(id: number, horse?: Horse): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;
-
     return this.http.delete<Hero>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted hero id=${id}`)),
       catchError(this.handleError<Hero>('deleteHero'))

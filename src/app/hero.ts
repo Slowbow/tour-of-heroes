@@ -1,4 +1,4 @@
-import { Horse } from "./horse";
+import { Horse } from './horse';
 
 export interface Hero {
   id: number;
