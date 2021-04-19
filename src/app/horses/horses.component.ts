@@ -4,7 +4,6 @@ import { Horse } from '../horse';
 import { HorseService } from '../horse.service';
 import { ColorEvent } from 'ngx-color';
 import { Router } from '@angular/router';
-import { HeroService } from '../hero.service';
 
 @Component({
   selector: 'app-horses',
@@ -17,7 +16,7 @@ export class HorsesComponent implements OnInit {
   selectedHorse: Horse;
   @Output() horseSelected: EventEmitter<Horse> = new EventEmitter();
   @Input() horseToDelete: Horse;
-  constructor(private horseService: HorseService, private heroService: HeroService, public router: Router) { }
+  constructor(private horseService: HorseService, public router: Router) { }
   ngOnInit(): void {
     this.getHorses();
   }

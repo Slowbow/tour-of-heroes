@@ -7,22 +7,18 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Hero } from './hero';
 import { Horse } from './horse';
 import { MessageService } from './message.service';
-import { HorseService } from './horse.service';
-
 
 @Injectable({ providedIn: 'root' })
 
 export class HeroService {
-
   private heroesUrl = 'api/heroes';  // URL to web api
-
+  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(
     private http: HttpClient,
-    private horseService: HorseService,
     private messageService: MessageService) { }
 
   /** GET heroes from the server */
